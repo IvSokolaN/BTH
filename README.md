@@ -1,13 +1,34 @@
-Добавить эту строчку в PHP.dockerfile, если используется php*-alpine
+# Установка
+
 ```
-    postgresql-dev
+docker-compose run --rm composer install
+cd src 
+npm install
+cp .env.example .env
+```
+### Настройки для .env
+```dotenv
+APP_URL=http://localhost:8088
+
+DB_CONNECTION=pgsql
+DB_HOST=postgres
+DB_PORT=5432
+DB_DATABASE=laravel_db_p
+DB_USERNAME=laravel
+DB_PASSWORD=password
 ```
 
-
-alias for bash
+### Генерация ключа; миграция; создание симлинка
 ```
-    a='docker-compose run --rm artisan'
-    dc='docker-compose run --rm composer'
-    dcd='docker-compose down'
-    dcn='docker-compose up nginx -d'
+docker-compose run --rm artisan key:generate
+docker-compose run --rm artisan migrate
+docker-compose run --rm artisan storage:link
+```
+
+## Alias for bash
+```
+   alias a='docker-compose run --rm artisan'
+   alias dc='docker-compose run --rm composer'
+   alias dcd='docker-compose down'
+   alias dcn='docker-compose up nginx -d'
 ```
