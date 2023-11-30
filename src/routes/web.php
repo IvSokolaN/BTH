@@ -2,6 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return '<a href="/products">Products</a>';
-})->name('home');
+Route::get('/{page}', \App\Http\Controllers\IndexController::class)->where('page', '.*');
