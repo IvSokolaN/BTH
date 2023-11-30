@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "variables";
+@import "sidebar";
+@import "main";
+@import "header";
+
+@layer base {
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply h-full bg-[#F2F6FA];
+  }
+}
+
+@layer components {
+  .wrapper {
+    @apply flex min-h-screen;
+  }
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 11px;
+  font-size: 11px;
+
+  //  body.lock
+  //&.lock {
+  //  @media (max-width: $mobile) {
+  //    overflow: hidden;
+  //  }
+  //}
+}
+
+th {
+  @apply font-normal;
+}

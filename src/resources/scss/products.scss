@@ -1,0 +1,27 @@
+@import "partials/buttons";
+
+.products {
+  @apply flex gap-4 justify-between pt-[9px] pr-[18px];
+}
+
+.table {
+  @apply min-w-[50%] text-[#6E6E6F];
+  // table__head
+  &__head {
+    @apply text-[9px] uppercase;
+  }
+
+  // table__body
+  &__body {
+      @apply bg-white divide-y divide-[#C4C4C4] border-y border-[#C4C4C4];
+  }
+
+  // table__row
+  td {
+      @apply pt-[22px] pb-[13px] pl-[18px] pr-2;
+  }
+
+  th {
+    @apply text-left pl-[18px] pr-2;
+  }
+}

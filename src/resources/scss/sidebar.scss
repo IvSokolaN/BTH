@@ -1,0 +1,27 @@
+.sidebar {
+  @apply flex flex-col w-[181px] bg-primaryColor text-white text-opacity-70;
+
+  //. sidebar__header
+  &__header {
+    @apply flex ;
+  }
+
+  //. sidebar__logo
+  &__logo {
+    @apply flex items-center justify-center w-[79px] h-[59px] bg-white rounded-br-[20px];
+  }
+
+  // . sidebar__text
+  &__text {
+    @apply pl-[12px] pt-[7px] text-white;
+  }
+}
+
+.menu {
+  @apply mt-[13px] pl-[34px] pr-2;
+
+  // .menu__item
+  &__item {
+    @apply pb-4 text-xs;
+  }
+}

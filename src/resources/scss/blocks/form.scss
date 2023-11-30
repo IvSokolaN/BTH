@@ -1,0 +1,76 @@
+.form {
+  @apply flex flex-col w-[472px];
+
+  // .form__input
+  &__input {
+    @apply p-2 mt-[8px] mb-[13px] rounded-[5px] h-[30px] text-black;
+    &--no-marginBottom {
+      @apply mb-0;
+    }
+  }
+
+  // .form__select
+  &__select {
+    @apply bg-expand-down bg-no-repeat bg-right text-[#1a202c] text-[11px] p-[9px] h-[30px];
+  }
+
+  //.form__select
+  &__select {
+    @apply rounded-t-[5px] rounded-b-[5px] mt-[8px] mb-0 bg-white w-full text-left;
+    &--open {
+      @apply rounded-b-[0px];
+    }
+  }
+}
+
+.status-container {
+  @apply flex flex-col relative;
+}
+
+.select {
+  @apply absolute w-full top-full z-10 rounded-b-[5px] bg-white text-[#1a202c];
+
+  &.active {
+    @apply block;
+  }
+
+  // .select__item
+  &__item {
+    @apply p-[9px] border-t cursor-pointer;
+
+    // .select__item--selected
+    &--selected {
+      @apply bg-[#50A9FC] last:rounded-b-[5px];
+    }
+
+    &:hover {
+      @apply bg-blue-300 last:rounded-b-[5px];
+    }
+  }
+}
+
+.attributes {
+  @apply flex flex-col mt-[13px] mb-[22px];
+  // .attributes__title
+  &__title {
+    @apply text-[14px] font-bold mb-[5px];
+  }
+
+  // .attributes__add-attribute
+  &__add-attribute {
+    @apply underline decoration-dashed underline-offset-2 text-[#0FC5FF] cursor-pointer w-max mt-[13px];
+  }
+}
+
+.attribute {
+  @apply flex gap-[11px] justify-between items-center first-of-type:mt-[20px] mb-[13px] last-of-type:mb-0;
+
+  // .attribute__input
+  &__input {
+    @apply flex flex-col w-full;
+  }
+  //.attribute__delete-button
+  &__delete-button {
+    @apply pt-[17px];
+  }
+}

@@ -1,0 +1,16 @@
+.modal {
+  @apply fixed z-50 inset-0;
+
+  //. modal__background
+  &__background {
+    @apply  fixed inset-0 bg-gray-500 opacity-70;
+  }
+  // .modal__body
+  &__body {
+    @apply bg-primaryColor m-auto fixed inset-0 w-[630px] h-max p-[12px] pt-[27px] pb-[40px] text-white text-[9px] ;
+  }
+  //.modal__header
+  &__header {
+    @apply flex justify-between items-center mb-[30px] text-[20px] font-bold;
+  }
+}

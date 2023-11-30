@@ -1,0 +1,12 @@
+.header {
+  @apply flex items-center justify-between bg-white w-full h-[59px];
+  // .header__title
+  &__title {
+    @apply text-[#ED1C24] uppercase pl-[17px] underline decoration-[3px] underline-offset-[23px];
+  }
+
+  // .header__user
+  &__user {
+    @apply text-[#A6AFB8] pr-[31px]
+  }
+}
