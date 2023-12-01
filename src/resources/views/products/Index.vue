@@ -1,5 +1,13 @@
 <script setup>
+import {ref} from "vue";
 import AppLayout from "../components/layouts/AppLayout.vue";
+import Modal from "../components/Modal.vue";
+
+const isModalVisible = ref(false);
+
+const closeModal = () => isModalVisible.value = false;
+const showModal = () => isModalVisible.value = true;
+
 
 </script>
 
@@ -23,7 +31,6 @@ import AppLayout from "../components/layouts/AppLayout.vue";
           <td>
             <p>Цвет: черный</p>
             <p>Цвет: Lorem </p>
-            <p>Цвет: черный</p>
           </td>
         </tr>
         <tr>
@@ -37,13 +44,31 @@ import AppLayout from "../components/layouts/AppLayout.vue";
 
       <button type="button"
               class="products__add button"
-              @click="showModal">
+              @click="showModal()">
         Добавить
       </button>
     </div>
+
+    <Transition>
+      <Modal
+          v-if="isModalVisible"
+          @close="closeModal()">
+
+      </Modal>
+    </Transition>
   </AppLayout>
 </template>
 
 <style scoped>
 @import "../../scss/products.scss";
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>
