@@ -11,15 +11,11 @@ defineProps({
 const statusList = ref(false)
 const status = ref('Доступен')
 
-// const status = ['Доступен', 'Недоступен']
 function closeStatusList(val) {
   statusList.value = false
   status.value = val
 }
 
-// function openStatusList() {
-//   statusList.value = !statusList.value
-// }
 </script>
 
 <template>
@@ -48,6 +44,8 @@ function closeStatusList(val) {
         Недоступен
       </li>
     </ul>
+
+
   </div>
 </template>
 

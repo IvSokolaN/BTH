@@ -12,12 +12,19 @@ defineProps({
     type: String,
     required: true
   },
+  value: {
+    type: String,
+  },
 })
 </script>
 
 <template>
   <label :for="id">{{ label }}</label>
-  <input type="text" :name="name" :id="id" class="form__input">
+  <input type="text"
+         class="form__input"
+         :name="name"
+         :id="id"
+         :value="value">
 </template>
 
 <style scoped lang="scss">

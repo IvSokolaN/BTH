@@ -13,6 +13,7 @@ export default {
             },
             backgroundImage: {
                 'expand-down': "url('/img/expand_down.svg')",
+                'recycle': "url('/img/recycle.svg')",
             }
         }
     },

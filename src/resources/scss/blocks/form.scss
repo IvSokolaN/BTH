@@ -53,6 +53,7 @@
   @apply flex flex-col mt-[13px] mb-[22px];
   // .attributes__title
   &__title {
+    //@apply text-[14px] font-bold;
     @apply text-[14px] font-bold mb-[5px];
   }
 
@@ -62,15 +63,15 @@
   }
 }
 
-.attribute {
-  @apply flex gap-[11px] justify-between items-center first-of-type:mt-[20px] mb-[13px] last-of-type:mb-0;
-
-  // .attribute__input
-  &__input {
-    @apply flex flex-col w-full;
-  }
-  //.attribute__delete-button
-  &__delete-button {
-    @apply pt-[17px];
-  }
-}
+//.attribute {
+//  @apply flex gap-[11px] justify-between items-center first-of-type:mt-[20px] mb-[13px] last-of-type:mb-0;
+//
+//  // .attribute__input
+//  &__input {
+//    @apply flex flex-col w-full;
+//  }
+//  //.attribute__delete-button
+//  &__delete-button {
+//    @apply pt-[17px];
+//  }
+//}
