@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('article')->unique();
-            $table->string('name');
+            $table->string('title');
             $table->string('status')->default('unavailable');
-            $table->jsonb('data');
+            $table->jsonb('data')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

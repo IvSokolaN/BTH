@@ -4,7 +4,11 @@ import InputText from "./partials/InputText.vue";
 import Select from "./partials/Select.vue";
 import {ref} from 'vue'
 
+const emit = defineEmits(['close'])
 const attributes = ref([])
+const articleProduct = ref(null)
+const titleProduct = ref(null)
+const statusProduct = ref('Доступен')
 
 function removeAttributeItem(index) {
   attributes.value.splice(index, 1)
@@ -18,8 +22,16 @@ function addAttributeItem() {
 }
 
 function submit() {
-
-  console.log(attributes.value)
+  axios.post('/api/products/store', {
+    article: articleProduct.value,
+    title: titleProduct.value,
+    status: statusProduct.value,
+    data: attributes.value
+  })
+      .then(res => {
+        console.log(res.data)
+        emit('close')
+      })
 }
 </script>
 
@@ -43,13 +55,14 @@ function submit() {
               @submit.prevent="submit()">
           <InputText id="article"
                      label="Артикул"
-                     name="article"/>
+                     v-model="articleProduct"/>
 
           <InputText id="title"
                      label="Название"
-                     name="title"/>
+                     v-model="titleProduct"/>
 
-          <Select label="Статус"/>
+          <Select label="Статус"
+                  v-model="statusProduct"/>
 
           <div class="attributes">
             <h4 class="attributes__title">Атрибуты</h4>
@@ -62,16 +75,14 @@ function submit() {
                      :class="{ 'attribute--last': index === attributes.length - 1 }">
                   <div class="attribute__input">
                     <InputText :id="'attributeTitle_' + index"
-                               :name="'attributeTitle_' + index"
                                label="Название"
-                               :value="attribute.title"/>
+                               v-model="attribute.title"/>
                   </div>
 
                   <div class="attribute__input">
-                    <InputText :id="'attributeTitle_' + index"
-                               :name="'attributeValue_' + index"
+                    <InputText :id="'attributeValue_' + index"
                                label="Значение"
-                               :value="attribute.value"/>
+                               v-model="attribute.value"/>
                   </div>
 
                   <button class="attribute__delete-button"

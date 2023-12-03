@@ -8,23 +8,20 @@ defineProps({
     type: String,
     required: true
   },
-  name: {
-    type: String,
+  modelValue: {
     required: true
-  },
-  value: {
-    type: String,
-  },
+  }
 })
+defineEmits(['update:modelValue'])
 </script>
 
 <template>
   <label :for="id">{{ label }}</label>
   <input type="text"
          class="form__input"
-         :name="name"
          :id="id"
-         :value="value">
+         :value="modelValue"
+         @input="$emit('update:modelValue', $event.target.value)">
 </template>
 
 <style scoped lang="scss">

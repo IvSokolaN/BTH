@@ -6,7 +6,11 @@ defineProps({
     type: String,
     required: true
   },
+  modelValue: {
+    type: String,
+  }
 })
+const emit = defineEmits(['update:modelValue'])
 
 const statusList = ref(false)
 const status = ref('Доступен')
@@ -14,6 +18,7 @@ const status = ref('Доступен')
 function closeStatusList(val) {
   statusList.value = false
   status.value = val
+  emit('update:modelValue', val)
 }
 
 </script>
@@ -44,8 +49,6 @@ function closeStatusList(val) {
         Недоступен
       </li>
     </ul>
-
-
   </div>
 </template>
 

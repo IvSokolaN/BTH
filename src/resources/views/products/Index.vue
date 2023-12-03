@@ -7,8 +7,6 @@ const isModalVisible = ref(false);
 
 const closeModal = () => isModalVisible.value = false;
 const showModal = () => isModalVisible.value = true;
-
-
 </script>
 
 <template>
@@ -53,7 +51,6 @@ const showModal = () => isModalVisible.value = true;
       <Modal
           v-if="isModalVisible"
           @close="closeModal()">
-
       </Modal>
     </Transition>
   </AppLayout>
