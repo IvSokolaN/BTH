@@ -7,6 +7,13 @@ const isModalVisible = ref(false);
 
 const closeModal = () => isModalVisible.value = false;
 const showModal = () => isModalVisible.value = true;
+
+function getProducts() {
+  axios.get('/api/products')
+      .then(res => {
+        console.log(res.data)
+      })
+}
 </script>
 
 <template>
@@ -30,12 +37,6 @@ const showModal = () => isModalVisible.value = true;
             <p>Цвет: черный</p>
             <p>Цвет: Lorem </p>
           </td>
-        </tr>
-        <tr>
-          <td>456</td>
-          <td>name</td>
-          <td>status</td>
-          <td>attributes</td>
         </tr>
         </tbody>
       </table>

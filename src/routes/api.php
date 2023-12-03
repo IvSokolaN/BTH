@@ -9,5 +9,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //  Products Routing
 Route::prefix('/products')->group(function () {
+    Route::get('/', \App\Http\Controllers\Product\IndexController::class);
     Route::post('/store', \App\Http\Controllers\Product\StoreController::class);
 });
