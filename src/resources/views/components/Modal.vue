@@ -29,8 +29,8 @@ function submit() {
     data: attributes.value
   })
       .then(res => {
-        console.log(res.data)
         emit('close')
+        emit('getProducts')
       })
 }
 </script>

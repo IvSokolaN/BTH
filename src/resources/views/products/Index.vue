@@ -2,18 +2,19 @@
 import {ref} from "vue";
 import AppLayout from "../components/layouts/AppLayout.vue";
 import Modal from "../components/Modal.vue";
+import {useRootStore} from "../../js/stores/root.js";
+import {storeToRefs} from "pinia";
 
+const rootStore = useRootStore();
 const isModalVisible = ref(false);
 
+//  modal functions
 const closeModal = () => isModalVisible.value = false;
 const showModal = () => isModalVisible.value = true;
 
-function getProducts() {
-  axios.get('/api/products')
-      .then(res => {
-        console.log(res.data)
-      })
-}
+//  get products
+rootStore.getProducts();
+const {products} = storeToRefs(rootStore);
 </script>
 
 <template>
@@ -29,13 +30,17 @@ function getProducts() {
         </tr>
         </thead>
         <tbody class="table__body">
-        <tr class="table__row">
-          <td>mtokb2</td>
-          <td>MTOK-B2/216-1KT3645-K</td>
-          <td>Доступен</td>
+        <tr class="table__row"
+            v-for="product in products"
+            :key="product.id">
+          <td>{{ product.article }}</td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.status }}</td>
           <td>
-            <p>Цвет: черный</p>
-            <p>Цвет: Lorem </p>
+            <p v-for="attribute in product.data"
+               :key="attribute.id">
+              {{ attribute.title }}: {{ attribute.value }}
+            </p>
           </td>
         </tr>
         </tbody>
