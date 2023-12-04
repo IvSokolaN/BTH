@@ -2,17 +2,29 @@
 import {ref} from "vue";
 import AppLayout from "../components/layouts/AppLayout.vue";
 import Modal from "../components/Modal.vue";
-import {useRootStore} from "../../js/stores/root.js";
+import CardProduct from "../components/CardProduct.vue";
+import {useProductStore} from "../../js/stores/root.js";
 import {storeToRefs} from "pinia";
 
 const isModalVisible = ref(false);
 const closeModal = () => isModalVisible.value = false;
 const showModal = () => isModalVisible.value = true;
 
-const rootStore = useRootStore();
-const getProducts = () => rootStore.getProducts();
+const productStore = useProductStore();
+const getProducts = () => productStore.getProducts();
 getProducts();
-const {products} = storeToRefs(rootStore);
+const {products, product} = storeToRefs(productStore);
+
+// Card
+const isModalCardVisible = ref(false);
+const closeCardModal = () => isModalCardVisible.value = false;
+const showCardModal = () => isModalCardVisible.value = true;
+
+function showProduct(id) {
+  productStore.getProduct(id);
+  showCardModal();
+}
+
 </script>
 
 <template>
@@ -30,7 +42,8 @@ const {products} = storeToRefs(rootStore);
         <tbody class="table__body">
         <tr class="table__row"
             v-for="product in products"
-            :key="product.id">
+            :key="product.id"
+            @click="showProduct(product.id)">
           <td>{{ product.article }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.status }}</td>
@@ -57,6 +70,14 @@ const {products} = storeToRefs(rootStore);
           @close="closeModal()"
           @updateProducts="getProducts()">
       </Modal>
+    </Transition>
+<!--     Card-->
+    <Transition>
+      <CardProduct
+          v-if="isModalCardVisible"
+          :product="product"
+          @closeCard="closeCardModal()">
+      </CardProduct>
     </Transition>
   </AppLayout>
 </template>

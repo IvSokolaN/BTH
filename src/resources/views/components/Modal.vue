@@ -102,6 +102,7 @@ function submit() {
           <button type="submit" class="button">Добавить</button>
         </form>
       </div>
+
     </div>
   </div>
 </template>
