@@ -5,15 +5,13 @@ import Modal from "../components/Modal.vue";
 import {useRootStore} from "../../js/stores/root.js";
 import {storeToRefs} from "pinia";
 
-const rootStore = useRootStore();
 const isModalVisible = ref(false);
-
-//  modal functions
 const closeModal = () => isModalVisible.value = false;
 const showModal = () => isModalVisible.value = true;
 
-//  get products
-rootStore.getProducts();
+const rootStore = useRootStore();
+const getProducts = () => rootStore.getProducts();
+getProducts();
 const {products} = storeToRefs(rootStore);
 </script>
 
@@ -56,7 +54,8 @@ const {products} = storeToRefs(rootStore);
     <Transition>
       <Modal
           v-if="isModalVisible"
-          @close="closeModal()">
+          @close="closeModal()"
+          @updateProducts="getProducts()">
       </Modal>
     </Transition>
   </AppLayout>

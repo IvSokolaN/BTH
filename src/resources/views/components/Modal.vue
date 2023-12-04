@@ -4,7 +4,7 @@ import InputText from "./partials/InputText.vue";
 import Select from "./partials/Select.vue";
 import {ref} from 'vue'
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'updateProducts'])
 const attributes = ref([])
 const articleProduct = ref(null)
 const titleProduct = ref(null)
@@ -30,7 +30,7 @@ function submit() {
   })
       .then(res => {
         emit('close')
-        emit('getProducts')
+        emit('updateProducts')
       })
 }
 </script>
