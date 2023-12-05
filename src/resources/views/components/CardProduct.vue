@@ -9,7 +9,7 @@ defineProps({
     required: true
   }
 })
-defineEmits(['closeCard'])
+defineEmits(['closeCard', 'deleteProduct'])
 
 </script>
 
@@ -29,7 +29,8 @@ defineEmits(['closeCard'])
           </button>
 
           <button type="button"
-                  class="modal__button">
+                  class="modal__button"
+                  @click="$emit('deleteProduct')">
             <IconTrash/>
           </button>
         </div>

@@ -11,18 +11,23 @@ const closeModal = () => isModalVisible.value = false;
 const showModal = () => isModalVisible.value = true;
 
 const productStore = useProductStore();
-const getProducts = () => productStore.getProducts();
-getProducts();
-const {products, product} = storeToRefs(productStore);
+const getProducts = () => productStore.getProducts()
+getProducts()
+const {products, product} = storeToRefs(productStore)
 
 // Card
-const isModalCardVisible = ref(false);
-const closeCardModal = () => isModalCardVisible.value = false;
-const showCardModal = () => isModalCardVisible.value = true;
+const isModalCardVisible = ref(false)
+const closeCardModal = () => isModalCardVisible.value = false
+const showCardModal = () => isModalCardVisible.value = true
 
 function showProduct(id) {
-  productStore.getProduct(id);
-  showCardModal();
+  productStore.getProduct(id)
+  showCardModal()
+}
+
+function deleteProduct(id) {
+  productStore.deleteProduct(id)
+  closeCardModal()
 }
 
 </script>
@@ -71,12 +76,14 @@ function showProduct(id) {
           @updateProducts="getProducts()">
       </Modal>
     </Transition>
-<!--     Card-->
+
+    <!--     Card-->
     <Transition>
       <CardProduct
           v-if="isModalCardVisible"
           :product="product"
-          @closeCard="closeCardModal()">
+          @closeCard="closeCardModal()"
+          @deleteProduct="deleteProduct(product.id)">
       </CardProduct>
     </Transition>
   </AppLayout>

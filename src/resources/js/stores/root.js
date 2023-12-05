@@ -13,8 +13,14 @@ export const useProductStore = defineStore('root', {
 
         async getProduct(id) {
             const data = await axios.get(`/api/products/${id}`)
-            console.log('pinia: ',data.data);
             this.product = data.data
+        },
+
+        async deleteProduct(id) {
+            await axios.delete(`/api/products/${id}`)
+                .then(res => {
+                    this.getProducts()
+                })
         }
     }
 })

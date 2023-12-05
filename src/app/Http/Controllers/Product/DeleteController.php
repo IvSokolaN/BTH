@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 
-class ShowController extends Controller
+class DeleteController extends Controller
 {
     /**
      * Handle the incoming request.
      */
     public function __invoke(Product $product)
     {
-        return $product;
+        $product->delete();
+
+        return response([]);
     }
 }

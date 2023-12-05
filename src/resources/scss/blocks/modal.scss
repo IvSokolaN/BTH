@@ -14,7 +14,7 @@
   // .modal__body
   &__body {
     @apply bg-primaryColor m-auto fixed inset-0 w-[630px] p-[12px] pt-[27px] pb-[40px]
-    text-white text-[9px] max-h-max min-h-[387px];
+    text-white text-[9px] max-h-[90%] min-h-[387px] overflow-auto;
   }
 
   // .modal__content

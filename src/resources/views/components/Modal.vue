@@ -21,6 +21,7 @@ function addAttributeItem() {
   })
 }
 
+//  TODO перенести в pinia, добавить валидацию
 function submit() {
   axios.post('/api/products/store', {
     article: articleProduct.value,
