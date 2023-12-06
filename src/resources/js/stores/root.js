@@ -12,15 +12,49 @@ export const useProductStore = defineStore('root', {
         },
 
         async getProduct(id) {
-            const data = await axios.get(`/api/products/${id}`)
-            this.product = data.data
+            const response = await axios.get(`/api/products/${id}`);
+            this.product = response.data;
+        },
+
+        async storeProduct(article, title, status, attributes) {
+            const productData = {
+                article,
+                title,
+                status,
+                data: attributes
+            }
+
+            try {
+                await axios.post('/api/products/store', productData)
+                await this.getProducts()
+            } catch (error) {
+                console.error(`Error storing product:`, error)
+            }
+        },
+
+        async editProduct(article, title, status, attributes) {
+            const productData = {
+                article,
+                title,
+                status,
+                data: attributes
+            }
+
+            try {
+                await axios.post('/api/products/store', productData)
+                await this.getProducts()
+            } catch (error) {
+                console.error(`Error storing product:`, error)
+            }
         },
 
         async deleteProduct(id) {
-            await axios.delete(`/api/products/${id}`)
-                .then(res => {
-                    this.getProducts()
-                })
+            try {
+                await axios.delete(`/api/products/${id}`)
+                await this.getProducts()
+            } catch (error) {
+                console.error(`Error deleting product with ID ${id}:`, error)
+            }
         }
     }
 })

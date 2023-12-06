@@ -12,5 +12,6 @@ Route::prefix('/products')->group(function () {
     Route::get('/', \App\Http\Controllers\Product\IndexController::class);
     Route::get('/{product}', \App\Http\Controllers\Product\ShowController::class);
     Route::post('/store', \App\Http\Controllers\Product\StoreController::class);
+    Route::patch('/edit', \App\Http\Controllers\Product\StoreController::class);
     Route::delete('/{product}', \App\Http\Controllers\Product\DeleteController::class);
 });

@@ -1,4 +1,4 @@
-<script setup xmlns="http://www.w3.org/1999/html">
+<script setup>
 import IconClose from "./icons/IconClose.vue";
 import IconTrash from "./icons/IconTrash.vue";
 import IconPencil from "./icons/IconPencil.vue";

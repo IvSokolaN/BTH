@@ -1,11 +1,9 @@
 <script setup>
-console.log('in EDIT PRODUCT')
+
 </script>
 
 <template>
-<div>
-  Edit Product
-</div>
+
 </template>
 
 <style scoped lang="scss">

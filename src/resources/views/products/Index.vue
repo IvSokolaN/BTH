@@ -1,35 +1,53 @@
 <script setup>
-import {ref} from "vue";
-import AppLayout from "../components/layouts/AppLayout.vue";
-import Modal from "../components/Modal.vue";
-import CardProduct from "../components/CardProduct.vue";
-import {useProductStore} from "../../js/stores/root.js";
-import {storeToRefs} from "pinia";
+import {ref, provide} from "vue"
+import AppLayout from "../components/layouts/AppLayout.vue"
+import Modal from "../components/Modal.vue"
+import ShowProduct from "./ShowProduct.vue"
+import CreateProduct from "./CreateProduct.vue";
+import EditProduct from "./EditProduct.vue";
+import {useProductStore} from "../../js/stores/root.js"
+import {storeToRefs} from "pinia"
+import IconTrash from "../components/icons/IconTrash.vue";
+import IconPencil from "../components/icons/IconPencil.vue";
 
-const isModalVisible = ref(false);
-const closeModal = () => isModalVisible.value = false;
-const showModal = () => isModalVisible.value = true;
+const isModalVisible = ref(false)
 
-const productStore = useProductStore();
+const productStore = useProductStore()
 const getProducts = () => productStore.getProducts()
 getProducts()
 const {products, product} = storeToRefs(productStore)
+const _provision_data = {
+  "productStore": productStore,
+  "product": product,
+  "closeModal": closeModal,
+}
+provide("provision_data", _provision_data)
 
-// Card
-const isModalCardVisible = ref(false)
-const closeCardModal = () => isModalCardVisible.value = false
-const showCardModal = () => isModalCardVisible.value = true
+const currentBody = ref('CreateProduct')
+const modalBodies = {
+  ShowProduct,
+  CreateProduct,
+  EditProduct
+}
+
+function closeModal() {
+  isModalVisible.value = false
+}
+
+function showModal(type) {
+  isModalVisible.value = true
+  currentBody.value = type
+}
 
 function showProduct(id) {
   productStore.getProduct(id)
-  showCardModal()
+  showModal('ShowProduct')
 }
 
 function deleteProduct(id) {
   productStore.deleteProduct(id)
-  closeCardModal()
+  closeModal()
 }
-
 </script>
 
 <template>
@@ -64,7 +82,7 @@ function deleteProduct(id) {
 
       <button type="button"
               class="products__add button"
-              @click="showModal()">
+              @click="showModal('CreateProduct')">
         Добавить
       </button>
     </div>
@@ -72,25 +90,44 @@ function deleteProduct(id) {
     <Transition>
       <Modal
           v-if="isModalVisible"
-          @close="closeModal()"
-          @updateProducts="getProducts()">
-      </Modal>
-    </Transition>
+          @close="closeModal()">
+        <template v-if="currentBody === 'CreateProduct'" #modal_header_create>
+          <h3>Добавить продукт</h3>
+        </template>
 
-    <!--     Card-->
-    <Transition>
-      <CardProduct
-          v-if="isModalCardVisible"
-          :product="product"
-          @closeCard="closeCardModal()"
-          @deleteProduct="deleteProduct(product.id)">
-      </CardProduct>
+        <template v-else-if="currentBody === 'EditProduct'" #modal_header_edit>
+          <h3>Редактировать {{ product.title }}</h3>
+        </template>
+
+        <template v-else #modal_header_show>
+          <h3>{{ product.title }}</h3>
+
+          <div class="flex ml-auto mr-[6px] gap-[2px]">
+            <button type="button"
+                    class="modal__button"
+                    @click="showModal('EditProduct')">
+              <IconPencil/>
+            </button>
+
+            <button type="button"
+                    class="modal__button"
+                    @click="deleteProduct(product.id)">
+              <IconTrash/>
+            </button>
+          </div>
+        </template>
+
+        <template #modal_content>
+          <component :is="modalBodies[currentBody]"/>
+        </template>
+      </Modal>
     </Transition>
   </AppLayout>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 @import "../../scss/products.scss";
+@import "../../scss/blocks/modal";
 
 .v-enter-active,
 .v-leave-active {
