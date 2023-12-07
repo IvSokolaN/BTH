@@ -4,10 +4,12 @@ import Select from "../components/partials/Select.vue";
 import {ref, inject, computed} from 'vue'
 
 const $services = inject('provision_data')
+const status = $services.status
+
 const attributes = ref([])
 const articleProduct = ref(null)
 const titleProduct = ref(null)
-const statusProduct = ref('Доступен')
+const statusProduct = ref('available')
 
 const isDisabled = computed(() => {
   return articleProduct.value && titleProduct.value
@@ -48,6 +50,7 @@ function submit() {
                v-model="titleProduct"/>
 
     <Select label="Статус"
+            :statusProd="status"
             v-model="statusProduct"/>
 
     <div class="attributes">

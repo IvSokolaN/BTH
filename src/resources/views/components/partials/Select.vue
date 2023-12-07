@@ -6,6 +6,10 @@ defineProps({
     type: String,
     required: true
   },
+  statusProd: {
+    type: Object,
+    required: true
+  },
   modelValue: {
     type: String,
   }
@@ -29,20 +33,20 @@ function closeStatusList(val) {
             class="form__select"
             :class="{ 'form__select_open': isStatusListOpened }"
             @click="isStatusListOpened = !isStatusListOpened">
-      {{ modelValue }}
+      {{ statusProd[modelValue] }}
     </button>
 
     <ul class="select"
         v-if="isStatusListOpened">
       <li class="select__item"
           :class="{ 'select__item_selected': modelValue === 'Доступен' }"
-          @click="closeStatusList('Доступен')">
+          @click="closeStatusList('available')">
         Доступен
       </li>
 
       <li class="select__item"
-          :class="{ 'select__item_selected': modelValue === 'Недоступен' }"
-          @click="closeStatusList('Недоступен')">
+          :class="{ 'select__item_selected': modelValue === 'unavailable' }"
+          @click="closeStatusList('unavailable')">
         Недоступен
       </li>
     </ul>

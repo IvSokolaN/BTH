@@ -15,10 +15,11 @@ const isModalVisible = ref(false)
 const productStore = useProductStore()
 const getProducts = () => productStore.getProducts()
 getProducts()
-const {products, product} = storeToRefs(productStore)
+const {products, product, status} = storeToRefs(productStore)
 const _provision_data = {
   "productStore": productStore,
   "product": product,
+  "status": status,
   "closeModal": closeModal,
 }
 provide("provision_data", _provision_data)
@@ -69,7 +70,7 @@ function deleteProduct(id) {
             @click="showProduct(product.id)">
           <td>{{ product.article }}</td>
           <td>{{ product.title }}</td>
-          <td>{{ product.status }}</td>
+          <td>{{ status[product.status] }}</td>
           <td>
             <p v-for="attribute in product.data"
                :key="attribute.id">

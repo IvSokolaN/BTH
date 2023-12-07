@@ -13,7 +13,8 @@ class IndexController extends Controller
      */
     public function __invoke()
     {
-        $products = Product::all();
+        $products = Product::latest()->get();
+//        dd(Product::latest()->get());
 //        $products = Product::available()->get();
 
         return ProductResource::collection($products);

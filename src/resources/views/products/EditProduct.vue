@@ -5,6 +5,7 @@ import {computed, inject, ref} from "vue"
 
 const $services = inject('provision_data')
 const product = $services.product.value
+const status = $services.status
 const articleProduct = ref(product.article)
 const titleProduct = ref(product.title)
 const statusProduct = ref(product.status)
@@ -35,7 +36,6 @@ function submit() {
 
   $services.closeModal()
 }
-
 </script>
 
 <template>
@@ -50,6 +50,7 @@ function submit() {
                v-model="titleProduct"/>
 
     <Select label="Статус"
+            :statusProd="status"
             v-model="statusProduct"/>
 
     <div class="attributes">

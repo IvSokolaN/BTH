@@ -3,6 +3,7 @@ import {inject} from "vue"
 
 const $services = inject('provision_data')
 const product = $services.product
+const status = $services.status
 </script>
 
 <template>
@@ -12,7 +13,7 @@ const product = $services.product
     <p>Название</p>
     <p>{{ product.title }}</p>
     <p>Статус</p>
-    <p>{{ product.status }}</p>
+    <p>{{ status[product.status] }}</p>
     <p>Атрибуты</p>
     <div>
       <p v-for="attribute in product.data">
@@ -29,5 +30,4 @@ const product = $services.product
     @apply odd:text-white odd:text-opacity-70;
   }
 }
-
 </style>
