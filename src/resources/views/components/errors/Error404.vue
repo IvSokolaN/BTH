@@ -4,7 +4,7 @@
 
 <template>
   <div class="text-2xl">
-    !!! 404 !!!
+    Страница не найдена. Ошибка 404.
   </div>
 </template>
 

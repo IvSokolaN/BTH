@@ -8,7 +8,7 @@ import {RouterLink} from 'vue-router'
     <div class="sidebar__header">
       <div class="sidebar__logo">
         <RouterLink to="/" class="underline text-3xl text-green-500 p-5">
-          <img src="/img/logo.png"
+          <img src="/public/img/logo.png"
                alt="Логотип Enterprise Resource Planning"
                width="53">
         </RouterLink>

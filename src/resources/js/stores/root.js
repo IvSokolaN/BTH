@@ -29,7 +29,11 @@ export const useProductStore = defineStore('root', {
                     this.getProducts()
                 })
                 .catch(error => {
-                    console.error(`Error storing product:`, error)
+                    if (error.response.status === 422) {
+                        console.log(`Error validation`,error.response.data.errors);
+                    } else {
+                        console.error(`Error storing product:`, error)
+                    }
                 })
         },
 
