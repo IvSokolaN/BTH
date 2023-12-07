@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Models\Product;
 
-class EditController extends Controller
+class UpdateController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -16,6 +16,6 @@ class EditController extends Controller
         $data = $request->validated();
         $product->update($data);
 
-        return $product;
+        return response([]);
     }
 }

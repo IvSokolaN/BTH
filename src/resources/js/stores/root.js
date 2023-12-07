@@ -8,12 +8,12 @@ export const useProductStore = defineStore('root', {
     actions: {
         async getProducts() {
             const response = await axios.get('/api/products')
-            this.products = response.data
+            this.products = response.data.data
         },
 
         async getProduct(id) {
-            const response = await axios.get(`/api/products/${id}`);
-            this.product = response.data;
+            const response = await axios.get(`/api/products/${id}`)
+            this.product = response.data
         },
 
         async storeProduct(article, title, status, attributes) {
@@ -47,7 +47,7 @@ export const useProductStore = defineStore('root', {
                 })
                 .catch(error => {
                     console.log(`Error editing product: `, error);
-                });
+                })
         },
 
         async deleteProduct(id) {

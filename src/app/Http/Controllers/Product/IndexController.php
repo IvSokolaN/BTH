@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Product\ProductResource;
 use App\Models\Product;
 
 class IndexController extends Controller
@@ -12,6 +13,8 @@ class IndexController extends Controller
      */
     public function __invoke()
     {
-        return Product::all();
+        $products = Product::all();
+
+        return ProductResource::collection($products);
     }
 }
