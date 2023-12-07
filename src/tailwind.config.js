@@ -3,6 +3,7 @@ export default {
     content: [
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
+        "./resources/**/*.vue",
     ],
     theme: {
         extend: {
@@ -12,6 +13,7 @@ export default {
             },
             backgroundImage: {
                 'expand-down': "url('/img/expand_down.svg')",
+                'recycle': "url('/img/recycle.svg')",
             }
         }
     },

@@ -13,12 +13,21 @@
 
   // table__body
   &__body {
-      @apply bg-white divide-y divide-[#C4C4C4] border-y border-[#C4C4C4];
+    @apply bg-white divide-y divide-[#C4C4C4] border-y border-[#C4C4C4];
+  }
+
+  // table__link
+  &__link {
+    @apply hover:underline;
   }
 
   // table__row
+  &__row {
+    @apply hover:underline hover:bg-[#F2F2F2] cursor-pointer;
+  }
+
   td {
-      @apply pt-[22px] pb-[13px] pl-[18px] pr-2;
+    @apply pt-[22px] pb-[13px] pl-[18px] pr-2;
   }
 
   th {
