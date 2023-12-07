@@ -1,7 +1,7 @@
 <script setup>
 import InputText from "../components/partials/InputText.vue"
 import Select from "../components/partials/Select.vue"
-import {inject, ref} from "vue"
+import {computed, inject, ref} from "vue"
 
 const $services = inject('provision_data')
 const product = $services.product.value
@@ -9,6 +9,10 @@ const articleProduct = ref(product.article)
 const titleProduct = ref(product.title)
 const statusProduct = ref(product.status)
 const attributes = ref(product.data)
+
+const isDisabled = computed(() => {
+  return articleProduct.value && titleProduct.value
+})
 
 function removeAttributeItem(index) {
   attributes.value.splice(index, 1)
@@ -83,7 +87,11 @@ function submit() {
       </button>
     </div>
 
-    <button type="submit" class="button">Сохранить</button>
+    <button type="submit"
+            class="button"
+            :disabled="!isDisabled">
+      Сохранить
+    </button>
   </form>
 </template>
 
