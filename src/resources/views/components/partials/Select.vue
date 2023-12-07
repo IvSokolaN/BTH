@@ -12,15 +12,12 @@ defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 
-const statusList = ref(false)
-const status = ref('Доступен')
+const isStatusListOpened = ref(false)
 
 function closeStatusList(val) {
-  statusList.value = false
-  status.value = val
+  isStatusListOpened.value = false
   emit('update:modelValue', val)
 }
-
 </script>
 
 <template>
@@ -30,21 +27,21 @@ function closeStatusList(val) {
     </label>
     <button type="button"
             class="form__select"
-            :class="{ 'form__select--open': statusList }"
-            @click="statusList = !statusList">
-      {{ status }}
+            :class="{ 'form__select_open': isStatusListOpened }"
+            @click="isStatusListOpened = !isStatusListOpened">
+      {{ modelValue }}
     </button>
 
     <ul class="select"
-        v-if="statusList">
+        v-if="isStatusListOpened">
       <li class="select__item"
-          :class="{ 'select__item--selected': status === 'Доступен' }"
+          :class="{ 'select__item_selected': modelValue === 'Доступен' }"
           @click="closeStatusList('Доступен')">
         Доступен
       </li>
 
       <li class="select__item"
-          :class="{ 'select__item--selected': status === 'Недоступен' }"
+          :class="{ 'select__item_selected': modelValue === 'Недоступен' }"
           @click="closeStatusList('Недоступен')">
         Недоступен
       </li>
@@ -55,7 +52,8 @@ function closeStatusList(val) {
 <style scoped lang="scss">
 .form__select {
   @apply rounded-t-[5px] rounded-b-[5px] mt-[8px] mb-0 bg-white w-full text-left bg-expand-down bg-no-repeat bg-right text-[#1a202c] text-[11px] p-[9px] h-[30px];
-  &--open {
+  // .form__select_open
+  &_open {
     @apply rounded-b-[0px];
   }
 }
@@ -75,8 +73,8 @@ function closeStatusList(val) {
   &__item {
     @apply p-[9px] border-t cursor-pointer;
 
-    // .select__item--selected
-    &--selected {
+    // .select__item_selected
+    &_selected {
       @apply bg-[#50A9FC] last:rounded-b-[5px];
     }
 
