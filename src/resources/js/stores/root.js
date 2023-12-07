@@ -2,8 +2,12 @@ import {defineStore} from "pinia";
 
 export const useProductStore = defineStore('root', {
     state: () => ({
+        product: {},
         products: [],
-        product: {}
+        status: {
+            available: 'Доступен',
+            unavailable: 'Недоступен'
+        },
     }),
     actions: {
         async getProducts() {
@@ -30,7 +34,7 @@ export const useProductStore = defineStore('root', {
                 })
                 .catch(error => {
                     if (error.response.status === 422) {
-                        console.log(`Error validation`,error.response.data.errors);
+                        console.log(`Error validation`, error.response.data.errors);
                     } else {
                         console.error(`Error storing product:`, error)
                     }
@@ -50,7 +54,11 @@ export const useProductStore = defineStore('root', {
                     this.getProducts()
                 })
                 .catch(error => {
-                    console.log(`Error editing product: `, error);
+                    if (error.response.status === 422) {
+                        console.log(`Error validation`, error.response.data.errors);
+                    } else {
+                        console.error(`Error storing product:`, error)
+                    }
                 })
         },
 

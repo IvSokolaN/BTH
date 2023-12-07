@@ -22,7 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'article' => 'required|string|min:10|unique:products,article',
+            'article' => 'required|string|min:10|unique:products,article,' . $this->product->id,
             'title' => 'required|string',
             'status' => 'required|string',
             'data' => 'array',
