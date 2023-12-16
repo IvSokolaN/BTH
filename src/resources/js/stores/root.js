@@ -36,21 +36,16 @@ export const useProductStore = defineStore('root', {
                 })
         },
 
-        async editProduct(article, title, status, attributes) {
-            const productData = {
-                article,
-                title,
-                status,
-                data: attributes
-            }
-
-            await axios.patch(`/api/products/${this.product.id}/edit`, productData)
+        // async editProduct(article, title, status, attributes) {
+        async editProduct(data) {
+            await axios.patch(`/api/products/${this.product.id}/edit`, data)
                 .then(() => {
+                    this.errorsValidation = {}
                     this.getProducts()
                 })
                 .catch(error => {
                     if (error.response.status === 422) {
-                        console.log(`Error validation`, error.response.data.errors);
+                        this.errorsValidation = error.response.data.errors
                     } else {
                         console.error(`Error storing product:`, error)
                     }

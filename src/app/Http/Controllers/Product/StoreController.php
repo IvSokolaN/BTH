@@ -16,6 +16,6 @@ class StoreController extends Controller
         $data = $request->validated();
         Product::create($data);
 
-        return response()->json(['message' => 'Thank you']);
+        return response()->json(['message' => 'Product created successfully.']);
     }
 }
