@@ -11,7 +11,6 @@ import {useProductStore} from "../../js/stores/root.js"
 import {storeToRefs} from "pinia"
 
 const isModalVisible = ref(false)
-
 const productStore = useProductStore()
 const getProducts = () => productStore.getProducts()
 getProducts()

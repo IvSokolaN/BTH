@@ -30,7 +30,7 @@ function addAttributeItem() {
 }
 
 function submit() {
-  store.$onAction(({after, store}) => {
+  const unsubscribeOnActionStore = store.$onAction(({after, store}) => {
     after(() => {
       if (Object.keys(store.errorsValidation).length === 0) {
         $services.closeModal()
@@ -39,6 +39,7 @@ function submit() {
   })
 
   store.storeProduct(form)
+  unsubscribeOnActionStore()
 }
 </script>
 
