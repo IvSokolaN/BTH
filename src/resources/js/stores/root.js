@@ -8,6 +8,7 @@ export const useProductStore = defineStore('root', {
             available: 'Доступен',
             unavailable: 'Недоступен'
         },
+        errorsValidation: {},
     }),
     actions: {
         async getProducts() {
@@ -20,21 +21,15 @@ export const useProductStore = defineStore('root', {
             this.product = response.data
         },
 
-        async storeProduct(article, title, status, attributes) {
-            const productData = {
-                article,
-                title,
-                status,
-                data: attributes
-            }
-
-            await axios.post('/api/products/store', productData)
+        async storeProduct(data) {
+            await axios.post('/api/products/store', data)
                 .then(() => {
+                    this.errorsValidation = {}
                     this.getProducts()
                 })
                 .catch(error => {
                     if (error.response.status === 422) {
-                        console.log(`Error validation`, error.response.data.errors);
+                        this.errorsValidation = error.response.data.errors
                     } else {
                         console.error(`Error storing product:`, error)
                     }

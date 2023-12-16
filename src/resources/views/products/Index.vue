@@ -2,25 +2,26 @@
 import {ref, provide} from "vue"
 import AppLayout from "../components/layouts/AppLayout.vue"
 import Modal from "../components/Modal.vue"
+import IconTrash from "../components/icons/IconTrash.vue";
+import IconPencil from "../components/icons/IconPencil.vue";
 import ShowProduct from "./ShowProduct.vue"
 import CreateProduct from "./CreateProduct.vue";
 import EditProduct from "./EditProduct.vue";
 import {useProductStore} from "../../js/stores/root.js"
 import {storeToRefs} from "pinia"
-import IconTrash from "../components/icons/IconTrash.vue";
-import IconPencil from "../components/icons/IconPencil.vue";
 
 const isModalVisible = ref(false)
 
 const productStore = useProductStore()
 const getProducts = () => productStore.getProducts()
 getProducts()
-const {products, product, status} = storeToRefs(productStore)
+const {products, product, status, errorsValidation} = storeToRefs(productStore)
 const _provision_data = {
   "productStore": productStore,
   "product": product,
   "status": status,
   "closeModal": closeModal,
+  "errorsValidation": errorsValidation,
 }
 provide("provision_data", _provision_data)
 
