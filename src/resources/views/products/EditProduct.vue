@@ -1,67 +1,87 @@
 <script setup>
 import InputText from "../components/partials/InputText.vue"
 import Select from "../components/partials/Select.vue"
-import {computed, inject, ref} from "vue"
+import {computed, inject, reactive} from "vue"
 
 const $services = inject('provision_data')
+const store = $services.productStore
 const product = $services.product.value
 const status = $services.status
-const articleProduct = ref(product.article)
-const titleProduct = ref(product.title)
-const statusProduct = ref(product.status)
-const attributes = ref(product.data)
+const errors = $services.errorsValidation
+const form = reactive({
+  article: product.article,
+  title: product.title,
+  status: product.status,
+  data: product.data,
+})
 
 const isDisabled = computed(() => {
-  return articleProduct.value && titleProduct.value
+  return form.article && form.title
 })
 
 function removeAttributeItem(index) {
-  attributes.value.splice(index, 1)
+  form.data.splice(index, 1)
 }
 
 function addAttributeItem() {
-  attributes.value.push({
+  form.data.push({
     title: '',
     value: ''
   })
 }
 
 function submit() {
-  $services.productStore.editProduct(
-      articleProduct.value,
-      titleProduct.value,
-      statusProduct.value,
-      attributes.value
-  )
+  const unsubscribeOnActionStore = store.$onAction(({after, store}) => {
+    after(() => {
+      if (Object.keys(store.errorsValidation).length === 0) {
+        $services.closeModal()
+      }
+    })
+  })
 
-  $services.closeModal()
+  store.editProduct(form)
+  unsubscribeOnActionStore()
 }
 </script>
 
 <template>
   <form class="form"
         @submit.prevent="submit()">
+    <div class="mb-[13px] flex flex-col">
     <InputText id="article"
                label="Артикул"
-               v-model="articleProduct"/>
+               :class="{ 'form__input_error': errors.article }"
+               v-model="form.article"/>
+      <p v-if="errors.article"
+         class="mt-2 text-red-500">
+        {{ errors.article[0] }}
+      </p>
+    </div>
 
+    <div class="mb-[13px] flex flex-col">
     <InputText id="title"
                label="Название"
-               v-model="titleProduct"/>
+               :class="{ 'form__input_error': errors.title }"
+               v-model="form.title"/>
+      <p v-if="errors.title"
+         class="mt-2 text-red-500">
+        {{ errors.title[0] }}
+      </p>
+    </div>
 
     <Select label="Статус"
             :statusProd="status"
-            v-model="statusProduct"/>
+            v-model="form.status"/>
 
     <div class="attributes">
       <h4 class="attributes__title">Атрибуты</h4>
 
       <ul class="mt-[20px]"
-          :class="{ 'mt-[0px]': attributes.length === 0 }">
-        <li v-for="(attribute, index) in attributes"
+          :class="{ 'mt-[0px]': form.data.length === 0 }">
+        <li v-for="(attribute, index) in form.data"
             :key="index">
           <div class="attribute"
-               :class="{ 'attribute--last': index === attributes.length - 1 }">
+               :class="{ 'attribute--last': index === form.data.length - 1 }">
             <div class="attribute__input">
               <InputText :id="'attributeTitle_' + index"
                          label="Название"
@@ -96,7 +116,7 @@ function submit() {
   </form>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import "../../scss/blocks/form.scss";
 @import "../../scss/partials/_buttons.scss";
 
