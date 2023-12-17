@@ -1,7 +1,7 @@
 <script setup>
 import InputText from "../components/partials/InputText.vue"
 import Select from "../components/partials/Select.vue"
-import {computed, inject, reactive, ref} from "vue"
+import {computed, inject, reactive} from "vue"
 
 const $services = inject('provision_data')
 const store = $services.productStore
