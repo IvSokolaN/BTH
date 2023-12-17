@@ -1,5 +1,5 @@
 <script setup>
-import {ref, provide} from "vue"
+import {provide, ref} from "vue"
 import AppLayout from "../components/layouts/AppLayout.vue"
 import Modal from "../components/Modal.vue"
 import IconTrash from "../components/icons/IconTrash.vue";

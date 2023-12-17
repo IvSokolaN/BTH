@@ -1,18 +1,17 @@
 <script setup>
 import InputText from "../components/partials/InputText.vue"
 import Select from "../components/partials/Select.vue"
-import {computed, inject, reactive} from "vue"
+import {inject, computed, reactive} from 'vue'
 
 const $services = inject('provision_data')
 const store = $services.productStore
-const product = $services.product.value
 const status = $services.status
 const errors = $services.errorsValidation
 const form = reactive({
-  article: product.article,
-  title: product.title,
-  status: product.status,
-  data: product.data,
+  article: '',
+  title: '',
+  status: 'available',
+  data: [],
 })
 
 const isDisabled = computed(() => {
@@ -39,7 +38,7 @@ function submit() {
     })
   })
 
-  store.editProduct(form)
+  store.storeProduct(form)
   unsubscribeOnActionStore()
 }
 </script>
@@ -47,24 +46,24 @@ function submit() {
 <template>
   <form class="form"
         @submit.prevent="submit()">
-    <div class="mb-[13px] flex flex-col">
-    <InputText id="article"
-               label="Артикул"
-               :class="{ 'form__input_error': errors.article }"
-               v-model="form.article"/>
+    <div class="form__row">
+      <InputText id="article"
+                 label="Артикул"
+                 :class="{ 'form__input_error': errors.article }"
+                 v-model="form.article"/>
       <p v-if="errors.article"
-         class="mt-2 text-red-500">
+         class="form__input_error-message">
         {{ errors.article[0] }}
       </p>
     </div>
 
-    <div class="mb-[13px] flex flex-col">
-    <InputText id="title"
-               label="Название"
-               :class="{ 'form__input_error': errors.title }"
-               v-model="form.title"/>
+    <div class="form__row">
+      <InputText id="title"
+                 label="Название"
+                 :class="{ 'form__input_error': errors.title }"
+                 v-model="form.title"/>
       <p v-if="errors.title"
-         class="mt-2 text-red-500">
+         class="form__input_error-message">
         {{ errors.title[0] }}
       </p>
     </div>
@@ -111,7 +110,7 @@ function submit() {
     <button type="submit"
             class="button"
             :disabled="!isDisabled">
-      Сохранить
+      Добавить
     </button>
   </form>
 </template>
@@ -119,6 +118,18 @@ function submit() {
 <style scoped lang="scss">
 @import "../../scss/blocks/form.scss";
 @import "../../scss/partials/_buttons.scss";
+
+.form {
+  // .form__input_error-message
+  &__input_error-message {
+    @apply mt-2 text-red-500;
+  }
+
+  // .form__row
+  &__row {
+    @apply mb-[13px] flex flex-col;
+  }
+}
 
 .attribute {
   @apply flex gap-[11px] justify-between items-center mt-[13px];
