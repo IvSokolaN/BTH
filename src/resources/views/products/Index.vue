@@ -33,11 +33,13 @@ const modalBodies = {
 
 function closeModal() {
   isModalVisible.value = false
+  document.body.classList.remove('lock')
 }
 
 function showModal(type) {
   isModalVisible.value = true
   currentBody.value = type
+  document.body.classList.add('lock')
 }
 
 function showProduct(id) {

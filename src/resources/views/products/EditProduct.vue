@@ -76,8 +76,8 @@ function submit() {
     <div class="attributes">
       <h4 class="attributes__title">Атрибуты</h4>
 
-      <ul class="mt-[20px]"
-          :class="{ 'mt-[0px]': form.data.length === 0 }">
+      <ul class="attributes__body"
+          :class="{ 'attributes__body_no-data': form.data.length === 0 }">
         <li v-for="(attribute, index) in form.data"
             :key="index">
           <div class="attribute"
@@ -121,7 +121,7 @@ function submit() {
 @import "../../scss/partials/_buttons.scss";
 
 .attribute {
-  @apply flex gap-[11px] justify-between items-center;
+  @apply flex gap-[11px] justify-between items-center mt-[13px];
 
   // .attribute__input
   &__input {
@@ -130,7 +130,7 @@ function submit() {
 
   //.attribute__delete-button
   &__delete-button {
-    @apply bg-recycle bg-no-repeat w-[10px] h-[11px] cursor-pointer p-[5px];
+    @apply bg-recycle bg-no-repeat w-[22px] h-[11px] cursor-pointer mt-4;
   }
 
   // .attribute--last

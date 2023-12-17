@@ -57,6 +57,16 @@
     @apply text-[14px] font-bold mb-[5px];
   }
 
+  // .attributes__body
+  &__body {
+    @apply mt-[7px];
+
+    // .attributes__body_no-data
+    &_no-data {
+      @apply mt-0;
+    }
+  }
+
   // .attributes__add-attribute
   &__add-attribute {
     @apply underline decoration-dashed underline-offset-2 text-[#0FC5FF] cursor-pointer w-max mt-[13px];
