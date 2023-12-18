@@ -36,9 +36,8 @@ export const useProductStore = defineStore('root', {
                 })
         },
 
-        // async editProduct(article, title, status, attributes) {
-        async editProduct(data) {
-            await axios.patch(`/api/products/${this.product.id}/edit`, data)
+        async updateProduct(data) {
+            await axios.patch(`/api/products/${this.product.id}/update`, data)
                 .then(() => {
                     this.errorsValidation = {}
                     this.getProducts()

@@ -28,14 +28,5 @@ defineEmits(['update:modelValue'])
 <style scoped lang="scss">
 .form__input {
   @apply p-2 mt-[8px] rounded-[5px] h-[30px] text-black;
-  //@apply p-2 mt-[8px] mb-[13px] rounded-[5px] h-[30px] text-black;
-  &--no-marginBottom {
-    @apply mb-0;
-  }
-
-  // .form__input_error {
-  &_error {
-    @apply bg-red-100;
-  }
 }
 </style>

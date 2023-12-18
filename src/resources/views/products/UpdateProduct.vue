@@ -3,5 +3,8 @@ import FormProduct from "../components/FormProduct.vue";
 </script>
 
 <template>
-  <FormProduct/>
+  <FormProduct
+      submitButtonText="Сохранить"
+      is-update
+  />
 </template>

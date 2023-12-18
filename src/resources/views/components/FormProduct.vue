@@ -1,7 +1,18 @@
 <script setup>
 import InputText from "../components/partials/InputText.vue"
 import Select from "../components/partials/Select.vue"
-import {computed, inject, reactive} from "vue"
+import {inject, computed, reactive} from 'vue'
+
+const props = defineProps({
+  submitButtonText: {
+    type: String,
+    default: 'Добавить'
+  },
+  isUpdate: {
+    type: Boolean,
+    default: false
+  }
+})
 
 const $services = inject('provision_data')
 const store = $services.productStore
@@ -9,10 +20,10 @@ const product = $services.product.value
 const status = $services.status
 const errors = $services.errorsValidation
 const form = reactive({
-  article: product.article,
-  title: product.title,
-  status: product.status,
-  data: product.data,
+  article: props.isUpdate ? product.article : '',
+  title: props.isUpdate ? product.title : '',
+  status: props.isUpdate ? product.status : 'available',
+  data: props.isUpdate ? product.data : [],
 })
 
 const isDisabled = computed(() => {
@@ -39,7 +50,8 @@ function submit() {
     })
   })
 
-  store.editProduct(form)
+  props.isUpdate ? store.updateProduct(form) : store.storeProduct(form)
+
   unsubscribeOnActionStore()
 }
 </script>
@@ -47,24 +59,24 @@ function submit() {
 <template>
   <form class="form"
         @submit.prevent="submit()">
-    <div class="mb-[13px] flex flex-col">
-    <InputText id="article"
-               label="Артикул"
-               :class="{ 'form__input_error': errors.article }"
-               v-model="form.article"/>
+    <div class="form__row">
+      <InputText id="article"
+                 label="Артикул"
+                 :class="{ 'form__input_error': errors.article }"
+                 v-model="form.article"/>
       <p v-if="errors.article"
-         class="mt-2 text-red-500">
+         class="form__input_error-message">
         {{ errors.article[0] }}
       </p>
     </div>
 
-    <div class="mb-[13px] flex flex-col">
-    <InputText id="title"
-               label="Название"
-               :class="{ 'form__input_error': errors.title }"
-               v-model="form.title"/>
+    <div class="form__row">
+      <InputText id="title"
+                 label="Название"
+                 :class="{ 'form__input_error': errors.title }"
+                 v-model="form.title"/>
       <p v-if="errors.title"
-         class="mt-2 text-red-500">
+         class="form__input_error-message">
         {{ errors.title[0] }}
       </p>
     </div>
@@ -111,7 +123,7 @@ function submit() {
     <button type="submit"
             class="button"
             :disabled="!isDisabled">
-      Сохранить
+      {{ submitButtonText }}
     </button>
   </form>
 </template>
@@ -119,28 +131,4 @@ function submit() {
 <style scoped lang="scss">
 @import "../../scss/blocks/form.scss";
 @import "../../scss/partials/_buttons.scss";
-
-.attribute {
-  @apply flex gap-[11px] justify-between items-center mt-[13px];
-
-  // .attribute__input
-  &__input {
-    @apply flex flex-col w-full;
-  }
-
-  //.attribute__delete-button
-  &__delete-button {
-    @apply bg-recycle bg-no-repeat w-[22px] h-[11px] cursor-pointer mt-4;
-  }
-
-  // .attribute--last
-  &--last {
-    @apply mb-0;
-  }
-
-  // .attribute--first
-  &--first {
-    @apply mt-[20px];
-  }
-}
 </style>

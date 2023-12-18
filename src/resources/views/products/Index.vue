@@ -6,7 +6,7 @@ import IconTrash from "../components/icons/IconTrash.vue";
 import IconPencil from "../components/icons/IconPencil.vue";
 import ShowProduct from "./ShowProduct.vue"
 import CreateProduct from "./CreateProduct.vue";
-import EditProduct from "./EditProduct.vue";
+import UpdateProduct from "./UpdateProduct.vue";
 import {useProductStore} from "../../js/stores/root.js"
 import {storeToRefs} from "pinia"
 
@@ -28,7 +28,7 @@ const currentBody = ref('CreateProduct')
 const modalBodies = {
   ShowProduct,
   CreateProduct,
-  EditProduct
+  UpdateProduct
 }
 
 function closeModal() {
@@ -98,7 +98,7 @@ function deleteProduct(id) {
           <h3>Добавить продукт</h3>
         </template>
 
-        <template v-else-if="currentBody === 'EditProduct'" #modal_header_edit>
+        <template v-else-if="currentBody === 'UpdateProduct'" #modal_header_update>
           <h3>Редактировать {{ product.title }}</h3>
         </template>
 
@@ -108,7 +108,7 @@ function deleteProduct(id) {
           <div class="flex ml-auto mr-[6px] gap-[2px]">
             <button type="button"
                     class="modal__button"
-                    @click="showModal('EditProduct')">
+                    @click="showModal('UpdateProduct')">
               <IconPencil/>
             </button>
 
