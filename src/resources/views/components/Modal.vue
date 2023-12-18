@@ -12,7 +12,7 @@ defineEmits(['close'])
     <div class="modal__body">
       <div class="modal__header">
         <slot name="modal_header_create"/>
-        <slot name="modal_header_edit"/>
+        <slot name="modal_header_update"/>
         <slot name="modal_header_show"/>
 
         <button type="button"

@@ -22,10 +22,39 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'article' => 'required|string|min:10|unique:products,article',
-            'title' => 'required|string',
-            'status' => 'required|string',
-            'data' => 'array',
+            'article' => [
+                'required',
+                'string',
+                'alpha_num:ascii',
+                'unique:products,article',
+            ],
+            'title' => [
+                'required',
+                'string',
+                'min:10',
+            ],
+            'status' => [
+                'required',
+                'string',
+            ],
+            'data' => [
+                'array',
+            ],
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function messages(): array
+    {
+        return [
+            'article.required' => 'Необходимо указать артикул.',
+            'article.unique' => 'Артикул уже существует.',
+            'article.alpha_num' => 'Артикул может содержать только буквы и цифры.',
+            'title.required' => 'Необходимо указать название.',
+            'title.min' => 'Название должно содержать не менее 10 символов.',
+            'status.required' => 'Необходимо указать статус.',
         ];
     }
 }

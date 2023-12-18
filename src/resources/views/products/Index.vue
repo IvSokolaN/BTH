@@ -1,26 +1,26 @@
 <script setup>
-import {ref, provide} from "vue"
+import {provide, ref} from "vue"
 import AppLayout from "../components/layouts/AppLayout.vue"
 import Modal from "../components/Modal.vue"
-import ShowProduct from "./ShowProduct.vue"
-import CreateProduct from "./CreateProduct.vue";
-import EditProduct from "./EditProduct.vue";
-import {useProductStore} from "../../js/stores/root.js"
-import {storeToRefs} from "pinia"
 import IconTrash from "../components/icons/IconTrash.vue";
 import IconPencil from "../components/icons/IconPencil.vue";
+import ShowProduct from "./ShowProduct.vue"
+import CreateProduct from "./CreateProduct.vue";
+import UpdateProduct from "./UpdateProduct.vue";
+import {useProductStore} from "../../js/stores/root.js"
+import {storeToRefs} from "pinia"
 
 const isModalVisible = ref(false)
-
 const productStore = useProductStore()
 const getProducts = () => productStore.getProducts()
 getProducts()
-const {products, product, status} = storeToRefs(productStore)
+const {products, product, status, errorsValidation} = storeToRefs(productStore)
 const _provision_data = {
   "productStore": productStore,
   "product": product,
   "status": status,
   "closeModal": closeModal,
+  "errorsValidation": errorsValidation,
 }
 provide("provision_data", _provision_data)
 
@@ -28,16 +28,18 @@ const currentBody = ref('CreateProduct')
 const modalBodies = {
   ShowProduct,
   CreateProduct,
-  EditProduct
+  UpdateProduct
 }
 
 function closeModal() {
   isModalVisible.value = false
+  document.body.classList.remove('lock')
 }
 
 function showModal(type) {
   isModalVisible.value = true
   currentBody.value = type
+  document.body.classList.add('lock')
 }
 
 function showProduct(id) {
@@ -96,7 +98,7 @@ function deleteProduct(id) {
           <h3>Добавить продукт</h3>
         </template>
 
-        <template v-else-if="currentBody === 'EditProduct'" #modal_header_edit>
+        <template v-else-if="currentBody === 'UpdateProduct'" #modal_header_update>
           <h3>Редактировать {{ product.title }}</h3>
         </template>
 
@@ -106,7 +108,7 @@ function deleteProduct(id) {
           <div class="flex ml-auto mr-[6px] gap-[2px]">
             <button type="button"
                     class="modal__button"
-                    @click="showModal('EditProduct')">
+                    @click="showModal('UpdateProduct')">
               <IconPencil/>
             </button>
 

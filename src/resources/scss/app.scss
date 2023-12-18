@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 @import "variables";
-//@import "sidebar";
-//@import "main";
-//@import "header";
 
 @layer base {
   html {
@@ -28,12 +25,18 @@ body {
   line-height: 11px;
   font-size: 11px;
 
-  //  body.lock
-  //&.lock {
-  //  @media (max-width: $mobile) {
-  //    overflow: hidden;
-  //  }
-  //}
+  //body.lock
+  &.lock {
+    overflow: hidden;
+
+    //@media (max-width: $mobile) {
+    //  overflow: hidden;
+    //}
+  }
+}
+
+h3 {
+  line-height: normal;
 }
 
 th {
