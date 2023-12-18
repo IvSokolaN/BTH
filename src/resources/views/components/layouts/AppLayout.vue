@@ -2,7 +2,7 @@
 import Sidebar from "../Sidebar.vue";
 import Header from "../Header.vue";
 
-let userName = "Иванов Иван Иванович";
+const userName = "Иванов Иван Иванович";
 
 </script>
 

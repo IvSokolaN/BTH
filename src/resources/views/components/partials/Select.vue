@@ -39,7 +39,7 @@ function closeStatusList(val) {
     <ul class="select"
         v-if="isStatusListOpened">
       <li class="select__item"
-          :class="{ 'select__item_selected': modelValue === 'Доступен' }"
+          :class="{ 'select__item_selected': modelValue === 'available' }"
           @click="closeStatusList('available')">
         Доступен
       </li>
@@ -56,6 +56,7 @@ function closeStatusList(val) {
 <style scoped lang="scss">
 .form__select {
   @apply rounded-t-[5px] rounded-b-[5px] mt-[8px] mb-0 bg-white w-full text-left bg-expand-down bg-no-repeat bg-right text-[#1a202c] text-[11px] p-[9px] h-[30px];
+
   // .form__select_open
   &_open {
     @apply rounded-b-[0px];
@@ -73,7 +74,7 @@ function closeStatusList(val) {
     @apply block;
   }
 
-  // .select__item
+   //.select__item
   &__item {
     @apply p-[9px] border-t cursor-pointer;
 

@@ -16,6 +16,6 @@ class UpdateController extends Controller
         $data = $request->validated();
         $product->update($data);
 
-        return response([]);
+        return response()->json(['message' => 'Product updated successfully.']);
     }
 }
