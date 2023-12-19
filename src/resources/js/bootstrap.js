@@ -8,19 +8,8 @@ import axios from 'axios';
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-// window.axios.interceptors.response.use(
-//     {},
-//     error => {
-//         if (error.response.status === 422) {
-//             console.log(error.response.data.errors);
-//         }
-//
-//         // if (error.response.status === 401) {
-//         //     window.location = '/login';
-//         // }
-//     }
-// )
+axios.defaults.withCredentials = true;
+axios.defaults.withXSRFToken = true;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

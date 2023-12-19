@@ -11,6 +11,10 @@ const props = defineProps({
   isUpdate: {
     type: Boolean,
     default: false
+  },
+  isAdmin: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -59,7 +63,10 @@ function submit() {
 <template>
   <form class="form"
         @submit.prevent="submit()">
-    <div class="form__row">
+<!--    TODO если пользователь имеет роль админа, то показывать этот инпут, иначе - скрыть-->
+    <div v-if="props.isAdmin"
+        class="form__row">
+<!--    <div class="form__row">-->
       <InputText id="article"
                  label="Артикул"
                  :class="{ 'form__input_error': errors.article }"

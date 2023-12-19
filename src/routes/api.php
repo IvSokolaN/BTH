@@ -15,3 +15,10 @@ Route::prefix('/products')->group(function () {
     Route::patch('/{product}/update', \App\Http\Controllers\Product\UpdateController::class);
     Route::delete('/{product}', \App\Http\Controllers\Product\DeleteController::class);
 });
+
+//  Users Routing
+Route::middleware('auth:sanctum')->group(function() {
+    Route::prefix('/users')->group(function () {
+        Route::get('/{user}', \App\Http\Controllers\User\ShowController::class);
+    });
+});
