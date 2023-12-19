@@ -3,5 +3,6 @@ import FormProduct from "../components/FormProduct.vue";
 </script>
 
 <template>
-  <FormProduct/>
+  <FormProduct
+      is-visible-input-article/>
 </template>

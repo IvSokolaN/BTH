@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Resources\User\UserResource;
 
 class ShowController extends Controller
 {
-    public function __invoke(User $user)
+    public function __invoke()
     {
-        return '1111111111111';
-//        dd($user, $user->getRole());
+        $user = auth()->user();
+
+        return new UserResource($user);
     }
 }

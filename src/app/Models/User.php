@@ -46,8 +46,8 @@ class User extends Authenticatable
 
     public function getRole()
     {
-        $userRole = Arr::pluck(config('products.users'), $this->email);
-//        dd($userRole);
-        return $userRole;
+        $usersList = config('products.users');
+
+        return $usersList[$this->email];
     }
 }
