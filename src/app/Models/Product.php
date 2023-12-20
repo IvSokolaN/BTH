@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
 
 class Product extends Model
 {
-    use HasFactory;
     use SoftDeletes;
+    use Notifiable;
 
     protected $fillable = [
         'article',
@@ -30,5 +31,13 @@ class Product extends Model
     public function scopeAvailable(Builder $query): void
     {
         $query->where('status', 'Доступен');
+    }
+
+    /**
+     * @return string
+     */
+    public function routeNotificationForMail(): string
+    {
+        return config('products.email');
     }
 }

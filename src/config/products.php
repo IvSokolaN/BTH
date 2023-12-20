@@ -6,5 +6,5 @@ return
             'user@user.mail' => 'user',
         ],
 
-        'email' => 'kHqXw@example.com',
+        'email' => 'sokolov.wd@bk.ru',
     ];
