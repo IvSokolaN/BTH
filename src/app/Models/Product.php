@@ -33,7 +33,10 @@ class Product extends Model
         $query->where('status', 'Доступен');
     }
 
-    public function routeNotificationForMail(): array|string
+    /**
+     * @return string
+     */
+    public function routeNotificationForMail(): string
     {
         return config('products.email');
     }

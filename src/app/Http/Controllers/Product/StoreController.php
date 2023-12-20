@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\StoreRequest;
+use App\Jobs\StoreProductJob;
 use App\Models\Product;
-use App\Notifications\CreateProduct;
+use App\Notifications\SendCreateProductNotification;
 
 class StoreController extends Controller
 {
@@ -16,8 +17,8 @@ class StoreController extends Controller
     {
         $data = $request->validated();
         $product = Product::create($data);
-        $product->notify(new CreateProduct());
+        StoreProductJob::dispatchAfterResponse($product);
 
-        return response()->json(['message' => 'Product created successfully.']);
+        return response([]);
     }
 }

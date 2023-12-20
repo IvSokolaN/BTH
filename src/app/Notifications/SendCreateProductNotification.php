@@ -3,10 +3,11 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CreateProduct extends Notification
+class SendCreateProductNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -15,7 +16,7 @@ class CreateProduct extends Notification
      */
     public function __construct()
     {
-//        $this->afterCommit(); // Надо для очереди
+        $this->afterCommit();
     }
 
     /**

@@ -16,6 +16,8 @@ DB_PORT=5432
 DB_DATABASE=laravel_db_p
 DB_USERNAME=laravel
 DB_PASSWORD=password
+
+QUEUE_CONNECTION=database
 ```
 
 ### Генерация ключа; миграция; создание симлинка
