@@ -46,8 +46,8 @@ class User extends Authenticatable
 
     public function getRole()
     {
-        $usersList = config('products.users');
+        $usersRolesList = config('products.users_roles');
 
-        return $usersList[$this->email];
+        return $usersRolesList[$this->email];
     }
 }

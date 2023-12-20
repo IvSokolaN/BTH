@@ -7,7 +7,10 @@ use App\Http\Resources\User\UserResource;
 
 class ShowController extends Controller
 {
-    public function __invoke()
+    /**
+     * @return UserResource
+     */
+    public function __invoke(): UserResource
     {
         $user = auth()->user();
 

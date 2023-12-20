@@ -1,9 +1,10 @@
 <script setup>
 import AppLayout from "../components/layouts/AppLayout.vue";
+
 </script>
 
 <template>
-  <AppLayout>
+  <AppLayout title="Главная">
     Main
   </AppLayout>
 </template>

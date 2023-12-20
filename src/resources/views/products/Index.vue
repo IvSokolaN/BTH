@@ -54,7 +54,7 @@ function deleteProduct(id) {
 </script>
 
 <template>
-  <AppLayout>
+  <AppLayout title="Продукты">
     <div class="products">
       <table class="products__table table">
         <thead class="table__head">

@@ -9,6 +9,10 @@
   //. sidebar__logo
   &__logo {
     @apply flex items-center justify-center w-[79px] h-[59px] bg-white rounded-br-[20px];
+    //. sidebar__logo-link
+    &-link {
+        @apply underline text-3xl text-green-500 p-5;
+    }
   }
 
   // . sidebar__text
