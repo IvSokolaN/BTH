@@ -18,7 +18,11 @@ const route = useRoute();
 <template>
   <header class="header">
     <div class="header__title">
-      <RouterLink :to="route.fullPath" class="breadcrumbs__item breadcrumbs__item--active">{{ title }}</RouterLink>
+      <RouterLink
+          class="breadcrumbs__item breadcrumbs__item--active"
+          :to="route.fullPath">
+        {{ title }}
+      </RouterLink>
     </div>
 
     <div class="header__user">

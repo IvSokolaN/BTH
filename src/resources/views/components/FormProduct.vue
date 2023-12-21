@@ -1,7 +1,7 @@
 <script setup>
 import InputText from "../components/partials/InputText.vue"
 import Select from "../components/partials/Select.vue"
-import {inject, computed, reactive} from 'vue'
+import {computed, inject, reactive} from 'vue'
 
 const props = defineProps({
   submitButtonText: {
@@ -18,45 +18,45 @@ const props = defineProps({
   }
 })
 
-const $services = inject('provision_data')
-const store = $services.productStore
-const product = $services.product.value
-const status = $services.status
-const errors = $services.errorsValidation
+const services = inject('provision_data');
+const store = services.productStore;
+const product = services.product.value;
+const status = services.status;
+const errors = services.errorsValidation;
 const form = reactive({
   article: props.isUpdate ? product.article : '',
   title: props.isUpdate ? product.title : '',
   status: props.isUpdate ? product.status : 'available',
   data: props.isUpdate ? product.data : [],
-})
+});
 
 const isDisabled = computed(() => {
-  return form.article && form.title
-})
+  return form.article && form.title;
+});
 
 function removeAttributeItem(index) {
-  form.data.splice(index, 1)
+  form.data.splice(index, 1);
 }
 
 function addAttributeItem() {
   form.data.push({
     title: '',
     value: ''
-  })
+  });
 }
 
 function submit() {
   const unsubscribeOnActionStore = store.$onAction(({after, store}) => {
     after(() => {
       if (Object.keys(store.errorsValidation).length === 0) {
-        $services.closeModal()
+        services.closeModal();
       }
-    })
-  })
+    });
+  });
 
-  props.isUpdate ? store.updateProduct(form) : store.storeProduct(form)
+  props.isUpdate ? store.updateProduct(form) : store.storeProduct(form);
 
-  unsubscribeOnActionStore()
+  unsubscribeOnActionStore();
 }
 </script>
 
@@ -64,7 +64,7 @@ function submit() {
   <form class="form"
         @submit.prevent="submit()">
     <div v-if="props.isVisibleInputArticle"
-        class="form__row">
+         class="form__row">
       <InputText id="article"
                  label="Артикул"
                  :class="{ 'form__input_error': errors.article }"

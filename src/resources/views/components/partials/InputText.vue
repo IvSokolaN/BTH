@@ -11,8 +11,9 @@ defineProps({
   modelValue: {
     required: true
   }
-})
-defineEmits(['update:modelValue'])
+});
+
+defineEmits(['update:modelValue']);
 </script>
 
 <template>

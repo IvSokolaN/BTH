@@ -10,12 +10,16 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
         },
         {
             path: '/login',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/logout',
+            name: 'logout'
         },
         {
             path: '/products',
@@ -39,6 +43,10 @@ router.beforeEach((to, from, next) => {
         } else {
             return next({name: 'login'});
         }
+    } else if (to.name === 'logout') {
+        localStorage.removeItem('x_xsrf_token');
+
+        return next({name: 'login'});
     }
 
     next();
