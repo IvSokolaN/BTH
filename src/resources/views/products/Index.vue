@@ -1,20 +1,20 @@
 <script setup>
-import {provide, ref} from "vue"
-import AppLayout from "../components/layouts/AppLayout.vue"
-import Modal from "../components/Modal.vue"
+import {provide, ref} from "vue";
+import AppLayout from "../components/layouts/AppLayout.vue";
+import Modal from "../components/Modal.vue";
 import IconTrash from "../components/icons/IconTrash.vue";
 import IconPencil from "../components/icons/IconPencil.vue";
-import ShowProduct from "./ShowProduct.vue"
+import ShowProduct from "./ShowProduct.vue";
 import CreateProduct from "./CreateProduct.vue";
 import UpdateProduct from "./UpdateProduct.vue";
-import {useProductStore} from "../../js/stores/root.js"
-import {storeToRefs} from "pinia"
+import {useProductStore} from "../../js/stores/root.js";
+import {storeToRefs} from "pinia";
 
-const isModalVisible = ref(false)
-const productStore = useProductStore()
-const getProducts = () => productStore.getProducts()
-getProducts()
-const {products, product, status, errorsValidation} = storeToRefs(productStore)
+const isModalVisible = ref(false);
+const productStore = useProductStore();
+const getProducts = () => productStore.getProducts();
+getProducts();
+const {products, product, status, errorsValidation} = storeToRefs(productStore);
 const _provision_data = {
   "productStore": productStore,
   "product": product,
@@ -22,9 +22,9 @@ const _provision_data = {
   "closeModal": closeModal,
   "errorsValidation": errorsValidation,
 }
-provide("provision_data", _provision_data)
+provide("provision_data", _provision_data);
 
-const currentBody = ref('CreateProduct')
+const currentBody = ref('CreateProduct');
 const modalBodies = {
   ShowProduct,
   CreateProduct,
@@ -32,29 +32,29 @@ const modalBodies = {
 }
 
 function closeModal() {
-  isModalVisible.value = false
-  document.body.classList.remove('lock')
+  isModalVisible.value = false;
+  document.body.classList.remove('lock');
 }
 
 function showModal(type) {
-  isModalVisible.value = true
-  currentBody.value = type
-  document.body.classList.add('lock')
+  isModalVisible.value = true;
+  currentBody.value = type;
+  document.body.classList.add('lock');
 }
 
 function showProduct(id) {
-  productStore.getProduct(id)
-  showModal('ShowProduct')
+  productStore.getProduct(id);
+  showModal('ShowProduct');
 }
 
 function deleteProduct(id) {
-  productStore.deleteProduct(id)
-  closeModal()
+  productStore.deleteProduct(id);
+  closeModal();
 }
 </script>
 
 <template>
-  <AppLayout>
+  <AppLayout title="Продукты">
     <div class="products">
       <table class="products__table table">
         <thead class="table__head">

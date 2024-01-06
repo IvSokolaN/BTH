@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 
 class LoginController extends Controller
 {
-    public function __invoke(LoginRequest $loginRequest)
+    /**
+     * @param LoginRequest $loginRequest
+     * @return JsonResponse
+     */
+    public function __invoke(LoginRequest $loginRequest): JsonResponse
     {
         $data = $loginRequest->validated();
 
@@ -24,8 +28,10 @@ class LoginController extends Controller
             ]);
         }
 
-        return response()->json([
-            'message' => 'Неверно введен E-Mail или пароль',
-        ])->setStatusCode(422);
+        return response()
+            ->json([
+                'message' => 'Неверно введен E-Mail или пароль',
+            ])
+            ->setStatusCode(422);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 return
     [
-        'users' => [
+        'users_roles' => [
             'admin@asd.asd' => 'admin',
             'user@user.mail' => 'user',
         ],

@@ -18,8 +18,13 @@ export const useProductStore = defineStore('root', {
          * @return {Promise<void>} A promise that resolves when the products have been retrieved.
          */
         async getProducts() {
-            const response = await axios.get('/api/products');
-            this.products = response.data.data;
+            await axios.get('/api/products')
+                .then((response) => {
+                    this.products = response.data.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
         },
 
         /**
@@ -29,8 +34,13 @@ export const useProductStore = defineStore('root', {
          * @return {Promise} A Promise that resolves with the retrieved product data.
          */
         async getProduct(id) {
-            const response = await axios.get(`/api/products/${id}`);
-            this.product = response.data;
+            await axios.get(`/api/products/${id}`)
+                .then((response) => {
+                    this.product = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
         },
 
         /**

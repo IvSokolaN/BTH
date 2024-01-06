@@ -1,9 +1,9 @@
 <script setup>
-import {inject} from "vue"
+import {inject} from "vue";
 
-const $services = inject('provision_data')
-const product = $services.product
-const status = $services.status
+const $services = inject('provision_data');
+const product = $services.product;
+const status = $services.status;
 </script>
 
 <template>

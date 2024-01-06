@@ -1,7 +1,7 @@
 <script setup>
 import IconClose from "./icons/IconClose.vue";
 
-defineEmits(['close'])
+defineEmits(['close']);
 </script>
 
 <template>

@@ -2,6 +2,12 @@
 import Sidebar from "../Sidebar.vue";
 import Header from "../Header.vue";
 
+defineProps({
+  title: {
+    type: String,
+    required: true
+  }
+})
 const userName = "Иванов Иван Иванович";
 
 </script>
@@ -9,7 +15,10 @@ const userName = "Иванов Иван Иванович";
 <template>
   <Sidebar/>
   <main class="main">
-    <Header :user-name="userName"/>
+    <Header
+        :user-name="userName"
+        :title="title"
+    />
     <slot></slot>
   </main>
 </template>

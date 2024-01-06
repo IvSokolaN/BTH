@@ -20,7 +20,8 @@ export const useUserStore = defineStore('users', {
             await axios.get('/sanctum/csrf-cookie')
                 .then(() => {
                     axios.post('/api/login', data)
-                        .then(() => {
+                        .then((resp) => {
+                            localStorage.setItem('x_xsrf_token', resp.config.headers["X-XSRF-TOKEN"]);
                             router.push({name: 'home'});
                         })
                         .catch((error) => {

@@ -1,5 +1,5 @@
 <script setup>
-import {RouterLink} from 'vue-router'
+import {RouterLink} from 'vue-router';
 
 </script>
 
@@ -7,7 +7,7 @@ import {RouterLink} from 'vue-router'
   <aside class="sidebar">
     <div class="sidebar__header">
       <div class="sidebar__logo">
-        <RouterLink to="/" class="underline text-3xl text-green-500 p-5">
+        <RouterLink to="/" class="sidebar__logo-link">
           <img src="/public/img/logo.png"
                alt="Логотип Enterprise Resource Planning"
                width="53">

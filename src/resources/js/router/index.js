@@ -10,12 +10,16 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: Home,
         },
         {
             path: '/login',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/logout',
+            name: 'logout'
         },
         {
             path: '/products',
@@ -28,6 +32,24 @@ const router = createRouter({
             component: Error404
         },
     ]
+})
+
+router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem('x_xsrf_token');
+
+    if (!token) {
+        if (to.name === 'login') {
+            return next();
+        } else {
+            return next({name: 'login'});
+        }
+    } else if (to.name === 'logout') {
+        localStorage.removeItem('x_xsrf_token');
+
+        return next({name: 'login'});
+    }
+
+    next();
 })
 
 export default router

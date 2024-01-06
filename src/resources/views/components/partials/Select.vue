@@ -14,13 +14,13 @@ defineProps({
     type: String,
   }
 })
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue']);
 
-const isStatusListOpened = ref(false)
+const isStatusListOpened = ref(false);
 
 function closeStatusList(val) {
-  isStatusListOpened.value = false
-  emit('update:modelValue', val)
+  isStatusListOpened.value = false;
+  emit('update:modelValue', val);
 }
 </script>
 
@@ -55,7 +55,8 @@ function closeStatusList(val) {
 
 <style scoped lang="scss">
 .form__select {
-  @apply rounded-t-[5px] rounded-b-[5px] mt-[8px] mb-0 bg-white w-full text-left bg-expand-down bg-no-repeat bg-right text-[#1a202c] text-[11px] p-[9px] h-[30px];
+  @apply rounded-t-[5px] rounded-b-[5px] mt-[8px] mb-0 bg-white w-full text-left
+  bg-expand-down bg-no-repeat bg-right text-[#1a202c] text-[11px] p-[9px] h-[30px];
 
   // .form__select_open
   &_open {
@@ -74,7 +75,7 @@ function closeStatusList(val) {
     @apply block;
   }
 
-   //.select__item
+  //.select__item
   &__item {
     @apply p-[9px] border-t cursor-pointer;
 
