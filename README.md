@@ -1,3 +1,7 @@
+Тестовое задание для компании BTH. Описание задачи в файле [TASK.md](https://github.com/IvSokolaN/BTH/blob/main/TASK.md)
+
+Фронт написан на Vue, Бэк - Laravel.
+
 # Установка
 
 ```
